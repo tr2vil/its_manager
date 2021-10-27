@@ -4,6 +4,9 @@
 *.dll
 *.so
 *.dylib
+*.amd64
+*.freebsd
+*.darwin
 
 # Test binary, built with `go test -c`
 *.test
