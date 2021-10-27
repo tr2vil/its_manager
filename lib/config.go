@@ -49,12 +49,6 @@ func ConfigReader(filepath string) *Config {
 	if err != nil {
 		log.Fatal("Error : ", err)
 	}
-	/*
-		fmt.Println("-----------------------------")
-		fmt.Println(config.Process.Name)
-		fmt.Println(config.Process.Topic_name)
-		fmt.Println("-----------------------------")
-	*/
 
 	return &config
 }
