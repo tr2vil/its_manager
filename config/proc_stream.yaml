@@ -2,4 +2,4 @@ process:
   name: "stream"
   topic_name: "its-stream"
   script_path: "proc/proc_stream.go"
-  data_path: "data/imglog" //kafka 없는 개발 환경하에서 imglog 를 누적할 파일명. proc_stream은 파일을 주기적으로 확인하고 내용을 삭제한다.
+  data_path: "data/imglog" # kafka 없는 개발 환경하에서 imglog 를 누적할 파일명. proc_stream은 파일을 주기적으로 확인하고 내용을 삭제한다.

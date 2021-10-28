@@ -23,15 +23,24 @@ type ProcessConfig struct {
 	Name        string `yaml:"name"`
 	Topic_name  string `yaml:"topic_name"`
 	Script_path string `yaml:"script_path"`
+	Data_path   string `yaml:"data_path"`
 }
 
-type Config struct {
-	Log     LogConfig     `yaml:"log"`
-	Kafka   KafkaConfig   `yaml:"kafka"`
+type CommonConfig struct {
+	Log   LogConfig   `yaml:"log"`
+	Kafka KafkaConfig `yaml:"kafka"`
+}
+
+type ProcConfig struct {
 	Process ProcessConfig `yaml:"process"`
 }
 
-func FileReader(s_filepath string) []byte {
+type Config struct {
+	CommonConf CommonConfig
+	ProcConf   ProcConfig
+}
+
+func fileReader(s_filepath string) []byte {
 	bytes, err := ioutil.ReadFile(s_filepath)
 	if err != nil {
 		fmt.Println("Error Occured: ", err)
@@ -41,14 +50,34 @@ func FileReader(s_filepath string) []byte {
 	return bytes
 }
 
-func ConfigReader(filepath string) *Config {
-	var config Config
+func commonConfigReader(filepath string) *CommonConfig {
+	var config CommonConfig
 
-	content := FileReader(filepath)
+	content := fileReader(filepath)
 	err := yaml.Unmarshal(content, &config)
 	if err != nil {
 		log.Fatal("Error : ", err)
 	}
+
+	return &config
+}
+
+func processConfigReader(filepath string) *ProcConfig {
+	var config ProcConfig
+
+	content := fileReader(filepath)
+	err := yaml.Unmarshal(content, &config)
+	if err != nil {
+		log.Fatal("Error : ", err)
+	}
+
+	return &config
+}
+
+func ConfigReader(filepath string) *Config {
+	var config Config
+	(config.CommonConf) = *commonConfigReader("../config/common.yaml")
+	(config.ProcConf) = *processConfigReader(filepath)
 
 	return &config
 }
