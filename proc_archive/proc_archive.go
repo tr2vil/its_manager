@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	conf := lib.ConfigReader("../config/properties.yaml")
-	fmt.Println(conf.Kafka.Hosts)
-	fmt.Println(conf.Process.Name)
+	common_conf := lib.ConfigReader("../config/common.yaml")
+	fmt.Println(common_conf.Kafka.Hosts)
+	proc_conf := lib.ConfigReader("../config/proc_archive.yaml")
+	fmt.Println(proc_conf.Process.Name)
 }

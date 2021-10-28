@@ -1,0 +1,12 @@
+log:
+  level: "debug"
+  format: "%Y-%m-%d %H:%m:%s.%z"
+
+kafka:
+  hosts: [
+      "119.205.223.8",
+      "119.205.223.9",
+      "119.205.223.10"
+  ]
+  port: 9092
+  timeout: 3
