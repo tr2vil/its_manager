@@ -25,6 +25,7 @@ type ProcessConfig struct {
 	Script_path string `yaml:"script_path"`
 	Data_path   string `yaml:"data_path"`
 	Cycle_msec  int    `yaml:"cycle_msec"`
+	Target_file string `yaml:"target_file"`
 }
 
 type CommonConfig struct {

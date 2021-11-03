@@ -48,6 +48,18 @@ func FileReadLine(filepath string, ch chan string, quit chan bool) {
 	}
 }
 
+func WriteFile(filepath string, data string) {
+	fd, err := os.OpenFile(filepath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer fd.Close()
+
+	if _, err := fd.Write([]byte(data)); err != nil {
+		log.Fatal(err)
+	}
+}
+
 func FileReader(s_filepath string) []byte {
 	bytes, err := ioutil.ReadFile(s_filepath)
 	if err != nil {

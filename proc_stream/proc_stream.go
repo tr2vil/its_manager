@@ -15,7 +15,9 @@ func main() {
 	for {
 		select {
 		case res := <-ch:
+
 			fmt.Println(res)
+			lib.WriteFile(conf.ProcConf.Process.Target_file, string(res+"\n"))
 		}
 	}
 	fmt.Println("End for Loop")
