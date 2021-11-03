@@ -1,4 +1,4 @@
-module github.com/tr2vil/its_manager/lib
+module lib
 
 go 1.17
 
