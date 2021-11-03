@@ -12,11 +12,10 @@ func main() {
 	ch := make(chan string, 10)
 	quit := make(chan bool)
 	go lib.FileReadLine(conf.ProcConf.Process.Data_path, ch, quit)
-	fmt.Println("Start for Loop")
 	for {
 		select {
 		case res := <-ch:
-			fmt.Println("1-", res)
+			fmt.Println(res)
 		}
 	}
 	fmt.Println("End for Loop")

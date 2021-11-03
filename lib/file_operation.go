@@ -11,8 +11,6 @@ import (
 
 func FileReadLine(filepath string, ch chan string, quit chan bool) {
 	conf := ConfigReader("../config/proc_stream.yaml")
-	fmt.Println(conf.ProcConf.Process.Data_path)
-	fmt.Println(conf.ProcConf.Process.Cycle_msec)
 	tick := time.Tick(time.Duration(conf.ProcConf.Process.Cycle_msec) * time.Millisecond)
 	for {
 		select {
