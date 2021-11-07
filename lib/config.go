@@ -9,8 +9,9 @@ import (
 )
 
 type LogConfig struct {
-	Level  string `yaml:"level"`
-	Format string `yaml:"format"`
+	Level    string `yaml:"level"`
+	Format   string `yaml:"format"`
+	Filename string `yaml:"filename"`
 }
 
 type KafkaConfig struct {

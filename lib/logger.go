@@ -2,36 +2,34 @@ package lib
 
 import (
 	"fmt"
-	"log"
 	"os"
+
+	"github.com/sirupsen/logrus"
 )
 
-type LOGGER struct {
-	logger *log.Logger
+/*
+type Logger struct {
 }
 
-type Logger interface {
-	debug() bool
-	error() bool
-	service() bool
-}
+var LOGGER Logger
+*/
 
-func InitLogger() *LOGGER {
-	conf := ConfigReader("../config/common.yaml")
+var Log = logrus.New()
+
+func LogInit(confFilename string) {
+	//conf := ConfigReader("../config/common.yaml")
+	conf := ConfigReader(confFilename)
 	fmt.Println(conf.ProcConf.Process.Data_path)
-	logger := LOGGER{}
-	logger.logger = log.New(os.Stdout, "INFO : ", log.LstdFlags)
-	return &logger
-}
+	fmt.Println(conf.CommonConf.Log.Filename)
 
-func (l *LOGGER) debug() bool {
+	Log.SetFormatter(&logrus.JSONFormatter{})
+	Log.SetOutput(os.Stdout)
+	Log.SetLevel(logrus.TraceLevel)
 
-}
-
-func (l *LOGGER) error() bool {
-
-}
-
-func (l *LOGGER) service() bool {
-
+	/*
+		Log.WithFields(logrus.Fields{
+			"animal": "walrus",
+			"size":   10,
+		}).Info("A group of walrus emerges from the ocean")
+	*/
 }
