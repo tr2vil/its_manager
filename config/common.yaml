@@ -1,6 +1,7 @@
 log:
   level: "debug"
   format: "%Y-%m-%d %H:%m:%s.%z"
+  filename: "./worker.log"
 
 kafka:
   hosts: [

@@ -1,30 +1,60 @@
 package lib
 
 import (
-	"fmt"
-	"os"
+	"strings"
 
 	"github.com/sirupsen/logrus"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
-
-/*
-type Logger struct {
-}
-
-var LOGGER Logger
-*/
 
 var Log = logrus.New()
 
 func LogInit(confFilename string) {
-	//conf := ConfigReader("../config/common.yaml")
-	conf := ConfigReader(confFilename)
-	fmt.Println(conf.ProcConf.Process.Data_path)
-	fmt.Println(conf.CommonConf.Log.Filename)
+	var log_level logrus.Level
+	var log_filename string
+	var lum *lumberjack.Logger
 
-	Log.SetFormatter(&logrus.JSONFormatter{})
-	Log.SetOutput(os.Stdout)
-	Log.SetLevel(logrus.TraceLevel)
+	conf := ConfigReader(confFilename)
+
+	log_filename = conf.CommonConf.Log.Filename
+
+	// Set Log Rotate
+	lum = &lumberjack.Logger{
+		Filename:   log_filename,
+		MaxSize:    500,
+		MaxBackups: 3,
+		MaxAge:     14,
+		Compress:   true,
+	}
+
+	// Set Log Level
+	switch strings.ToLower(conf.CommonConf.Log.Level) {
+	case "panic":
+		log_level = logrus.PanicLevel
+	case "fatal":
+		log_level = logrus.FatalLevel
+	case "error":
+		log_level = logrus.ErrorLevel
+	case "warn":
+		log_level = logrus.WarnLevel
+	case "info":
+		log_level = logrus.InfoLevel
+	case "debug":
+		log_level = logrus.DebugLevel
+	case "trace":
+		log_level = logrus.TraceLevel
+	default:
+		log_level = logrus.ErrorLevel
+	}
+
+	//Log.SetFormatter(&logrus.JSONFormatter{TimestampFormat: time.RFC3339})
+	Log.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp: true,
+		ForceQuote:    true,
+	})
+	Log.SetOutput(lum)
+	Log.SetLevel(log_level)
+	Log.SetReportCaller(true)
 
 	/*
 		Log.WithFields(logrus.Fields{

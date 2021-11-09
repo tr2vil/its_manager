@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	LogInit("../config/common.yaml")
+	LogInit("../config/proc_stream.yaml")
 	conf := ConfigReader("../config/proc_stream.yaml")
 	Log.Info("[Start Proc Stream]")
 
