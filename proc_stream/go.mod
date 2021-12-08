@@ -2,7 +2,7 @@ module main
 
 go 1.17
 
-require github.com/tr2vil/its_manager/lib v0.0.0-20211027155916-72a192b8bc52
+require github.com/tr2vil/its_manager/lib v0.0.0-20211206153620-7433f70674ab
 
 require (
 	github.com/confluentinc/confluent-kafka-go v1.7.0 // indirect
