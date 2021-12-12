@@ -1,7 +1,9 @@
-package lib
+package logger
 
 import (
 	"strings"
+
+	"github.com/tr2vil/its_manager/lib/config"
 
 	"github.com/sirupsen/logrus"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -14,7 +16,7 @@ func LogInit(confFilename string) {
 	var log_filename string
 	var lum *lumberjack.Logger
 
-	conf := ConfigReader(confFilename)
+	conf := config.ConfigReader(confFilename)
 
 	log_filename = conf.CommonConf.Log.Filename
 

@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/tr2vil/its_manager/lib"
-	. "github.com/tr2vil/its_manager/lib"
-	//"github.com/tr2vil/its_manager/lib"
+	"github.com/tr2vil/its_manager/lib/config"
+	. "github.com/tr2vil/its_manager/lib/logger"
+	"github.com/tr2vil/its_manager/lib/message"
 )
 
 /*
@@ -30,14 +30,16 @@ func main() {
 */
 
 func main() {
+	fmt.Println("Start Main")
 	LogInit("../config/proc_stream.yaml")
 
 	Log.Info("[Start Proc Stream]")
 
-	conf := lib.ConfigReader("../config/proc_stream.yaml")
+	conf := config.ConfigReader("../config/proc_stream.yaml")
+	fmt.Println(conf)
 
-	consumer := lib.GetConsumer([]string{"127.0.0.1:9092"}, conf.ProcConf.Process.Topic_name)
-	defer lib.CloseConsumer(consumer)
+	consumer := message.GetConsumer([]string{"127.0.0.1:9092"}, conf.ProcConf.Process.Topic_name)
+	defer message.CloseConsumer(consumer)
 	fmt.Println(consumer)
 
 	fmt.Println("End for Loop")

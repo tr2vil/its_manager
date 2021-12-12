@@ -2,9 +2,12 @@ module main
 
 go 1.17
 
-require github.com/tr2vil/its_manager/lib v0.0.0-20211212021519-4cc9ddbadec4
+require (
+    github.com/tr2vil/its_manager/lib/logger 
+)
 
 require (
+	github.com/confluentinc/confluent-kafka-go v1.7.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	golang.org/x/sys v0.0.0-20191026070338-33540a1f6037 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect

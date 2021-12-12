@@ -79,7 +79,7 @@ func processConfigReader(filepath string) *ProcConfig {
 
 func ConfigReader(filepath string) *Config {
 	var config Config
-	(config.CommonConf) = *commonConfigReader("../../config/common.yaml")
+	(config.CommonConf) = *commonConfigReader("../config/common.yaml")
 	(config.ProcConf) = *processConfigReader(filepath)
 
 	return &config
